@@ -7,6 +7,8 @@ namespace Assignment_3_const
         static void Main(string[] args)
         {
             Car c = new Car(101,"toyoyo","abc",2002,200000);
+            c.GetAllDetails();
+            Console.ReadLine();
         }
     }
 }
