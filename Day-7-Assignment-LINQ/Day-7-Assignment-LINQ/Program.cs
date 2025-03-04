@@ -24,6 +24,9 @@ namespace Day_7_Assignment_LINQ
             {
                 Console.WriteLine($"ID: {product.ProductID},Name: {product.ProductName}");
             }
+            var mostExpensiveProduct = products.OrderByDescending(p => p.Price).First();
+            Console.Writeline("\nMost Expensive Product: ");
+            Console.Writeline($"ID: {mostExpensiveProduct.ProductID},Name: {mostExpensiveProduct.ProductName}, Price: {mostExpensiveProduct.Price}");
         }
     }
 }
