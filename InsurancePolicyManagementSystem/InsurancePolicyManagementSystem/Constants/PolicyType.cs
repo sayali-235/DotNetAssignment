@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace InsurancePolicyManagementSystem.Constants
-{
-   
+{ 
         public enum PolicyType
         {
             Life,

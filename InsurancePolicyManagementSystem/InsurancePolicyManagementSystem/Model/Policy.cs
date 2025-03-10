@@ -9,6 +9,7 @@ namespace InsurancePolicyManagementSystem.Model
 {
     internal class Policy
     {
+
         private static int idCounter = 1;
         public int PolicyID { get; }
         public string HolderName { get; set; }

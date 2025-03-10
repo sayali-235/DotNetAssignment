@@ -8,6 +8,7 @@ using InsurancePolicyManagementSystem.Model;
 
 namespace InsurancePolicyManagementSystem.Repository
 {
+
     internal interface IPolicyRepository
     {
         public void AddNewPolicy(Policy policy);

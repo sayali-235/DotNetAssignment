@@ -11,7 +11,6 @@ namespace InsurancePolicyManagementSystem.Repository
 {
     internal class PolicyRepository :  IPolicyRepository
     {
-        
         List<Policy> policies=new List<Policy>();
         public PolicyRepository()
         {

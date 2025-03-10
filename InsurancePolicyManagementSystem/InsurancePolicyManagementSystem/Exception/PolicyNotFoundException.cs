@@ -10,7 +10,6 @@ namespace InsurancePolicyManagementSystem.Exception
     {
         public PolicyNotFoundException(string message):base(message)
         {
-            
         }
     }
 }

@@ -12,7 +12,9 @@ namespace InsurancePolicyManagementSystem
             IPolicyRepository repository=new PolicyRepository();
             while (true)
             {
+                Console.WriteLine("************************************************************");
                 Console.WriteLine("\nInsurance Policy Management System");
+                Console.WriteLine("************************************************************");
                 Console.WriteLine("1.Add Policy");
                 Console.WriteLine("2.View All Policies");
                 Console.WriteLine("3.Search Policy by ID: ");
