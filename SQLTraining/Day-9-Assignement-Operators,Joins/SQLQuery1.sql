@@ -262,6 +262,11 @@ select * from Books
 where price < (select max(Price) from Books)
 --5. List all customers whose total spending is greater than the average spending of all customers
 
+select* from Customers
+where CustomerID in(
+select CustomerID
+from Orders where TotalAmount > (select avg(TotalAmount)
+from Orders))
 
 --Stored Procedure
 --1.Write a stored procedure that accepts a CustomerID and returns all orders placed by that customer
@@ -294,6 +299,11 @@ exec GetBooksByPriceRange 500,2000;
 
 --Views--
 --1.Create a view named AvailableBooks that shows only books that are in stock, including BookID, Title, AuthorID, Price, and PublishedYear
+select * from Books
+create view AvailableBooks
+as
+select * from Books
+where  PublishedYear >2000
 
- 
+select * from AvailableBooks 
 
