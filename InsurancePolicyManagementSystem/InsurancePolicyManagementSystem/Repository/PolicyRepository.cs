@@ -40,14 +40,13 @@ namespace InsurancePolicyManagementSystem.Repository
 
         public void UpdatePolicy(int id, string name, PolicyType type, DateTime startDate, DateTime endDate)
         {
-            Policy policy=SearchPolicyById(id);
+            Policy policy = SearchPolicyById(id);
             policy.HolderName = name;
-            policy.Type= type;
-            policy.StartDate= startDate;
-            policy.EndDate= endDate;
+            policy.Type = type;
+            policy.StartDate = startDate;
+            policy.EndDate = endDate;
             Console.WriteLine("Policy Updated Successfully");
         }
-
         public void ViewActivePolicies()
         {
             List<Policy> activePolicies = policies.FindAll(p => p.IsActive());

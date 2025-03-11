@@ -260,6 +260,7 @@ WHERE C.CustomerID IN (
 --4. Retrieve all books cheaper than the most expensive book written by( any  author based on your data) 
 select * from Books
 where price < (select max(Price) from Books)
+
 --5. List all customers whose total spending is greater than the average spending of all customers
 
 select* from Customers
