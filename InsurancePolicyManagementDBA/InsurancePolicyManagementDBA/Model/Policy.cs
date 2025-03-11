@@ -25,11 +25,11 @@ namespace InsurancePolicyManagementSystem.Model
         //    StartDate = startDate;
         //    EndDate = endDate;
         //}
-        public bool IsActive()
-        {
-            return DateTime.Now >= StartDate && DateTime.Now <= EndDate;
+        //public bool IsActive()
+        //{
+        //    return DateTime.Now >= StartDate && DateTime.Now <= EndDate;
 
-        }
+        //}
         public override string ToString()
         {
             return  $"ID:{PolicyID},\tPolicy Holder Name:{HolderName}\tPolicy Type:{Type}\tStart Date:{StartDate}\tEnd Date:{EndDate} ";

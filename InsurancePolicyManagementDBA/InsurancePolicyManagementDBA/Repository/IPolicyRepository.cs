@@ -16,7 +16,7 @@ namespace InsurancePolicyManagementSystem.Repository
         public int DeletePolicy(int id);
         public List<Policy> ViewAllPolicy();
         public Policy SearchPolicyById(int id);
-        public void ViewActivePolicies();
+        public List<Policy> ViewActivePolicies();
 
 
 

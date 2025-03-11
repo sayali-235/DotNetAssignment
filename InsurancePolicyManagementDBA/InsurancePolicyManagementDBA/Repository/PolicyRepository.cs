@@ -60,11 +60,45 @@ namespace InsurancePolicyManagementSystem.Repository
 
         public Policy SearchPolicyById(int id)
         {
-            Policy policy=policies.Find(p=>p.PolicyID == id);
-            if (policy == null)
-              throw new PolicyNotFoundException("Invalid Policy ID !!\nPolicy is Not Found");
-             return policy;
-            
+            List<Policy> policies = ViewAllPolicy();
+            using(SqlConnection sqlconnection =new SqlConnection(connstring))
+            {
+               
+                try
+                {
+                    if(!policies.Any(p => p.PolicyID == id))
+                    {
+                        throw new PolicyNotFoundException($"PolicyID {id} not found");
+                    }
+                    cmd.CommandText = "select * from Policies where PolicyID=@PolicyID";
+                    cmd.Parameters.AddWithValue("@PolicyID", id);
+                    cmd.Connection = sqlconnection;
+                    sqlconnection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        Policy policy = new Policy();
+                        policy.PolicyID = (int)reader["PolicyID"];
+                        policy.HolderName = (string)reader["HolderName"];
+                        policy.Type = (PolicyType)reader["PolicyType"];
+                        policy.StartDate = (DateTime)reader["StartDate"];
+                        policy.EndDate = (DateTime)reader["EndDate"];
+                        return policy;
+                     
+                    }
+                }
+                catch(PolicyNotFoundException ex)
+                {
+                    Console.WriteLine("Policy ID Not found");
+                    return null;
+                }
+                return null;
+            }
+            //    Policy policy = policies.Find(p => p.PolicyID == id);
+            //if (policy == null)
+            //  throw new PolicyNotFoundException("Invalid Policy ID !!\nPolicy is Not Found");
+            // return policy;
+
         }
 
         public int UpdatePolicy(int id)
@@ -145,15 +179,48 @@ namespace InsurancePolicyManagementSystem.Repository
 
         }
 
-        public void ViewActivePolicies()
+        public List<Policy> ViewActivePolicies()
         {
-            List<Policy> activePolicies = policies.FindAll(p => p.IsActive());
-            if(activePolicies.Count == 0)
+            //List<Policy> activePolicies = policies.FindAll(p => p.IsActive());
+            //if(activePolicies.Count == 0)
+            //{
+            //    Console.WriteLine("No active policies are found");
+            //    return;
+            //}
+            //activePolicies.ForEach(p => Console.WriteLine(p));
+            List<Policy> policyList = new List<Policy>();
+            using (SqlConnection sqlconnection = new SqlConnection(connstring))
             {
-                Console.WriteLine("No active policies are found");
-                return;
+
+                try
+                {
+                   
+                    cmd.CommandText = "select * from Policies where @Current between StartDate and EndDate";
+
+                    cmd.Parameters.AddWithValue("@Current", DateTime.Now.Date);
+                    cmd.Connection = sqlconnection;
+                    sqlconnection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Policy policy = new Policy();
+                        policy.PolicyID = (int)reader["PolicyID"];
+                        policy.HolderName = (string)reader["HolderName"];
+                        policy.Type = (PolicyType)reader["PolicyType"];
+                        policy.StartDate = (DateTime)reader["StartDate"];
+                        policy.EndDate = (DateTime)reader["EndDate"];
+                        policyList.Add(policy);
+
+                    }
+                    return policyList;
+                }
+                catch (PolicyNotFoundException ex)
+                {
+                    Console.WriteLine("No Active Policies");
+                    return null;
+                }
+                //return policies;
             }
-            activePolicies.ForEach(p => Console.WriteLine(p));
         }
 
         public List<Policy> ViewAllPolicy()

@@ -73,7 +73,11 @@ namespace InsurancePolicyManagementDBA
                             repository.DeletePolicy(deleteId);
                             break;
                         case 6:
-                            repository.ViewActivePolicies();
+                            List<Policy> Policiess = repository.ViewActivePolicies();
+                            foreach (var item in Policiess)
+                            {
+                                Console.WriteLine(item);
+                            }
                             break;
                         case 7:
                             return;
