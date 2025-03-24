@@ -1,0 +1,52 @@
+﻿@model StudentManagementSystemWithDatabase.Models.Course
+
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="text-center text-primary mb-4">Course Details</h2>
+        <hr />
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <dl class="row">
+                    <!-- Course Name -->
+                    <dt class="col-sm-4 fw-bold text-secondary">
+                        @Html.DisplayNameFor(model => model.CourseName)
+                    </dt>
+                    <dd class="col-sm-8 text-dark">
+                        @Html.DisplayFor(model => model.CourseName)
+                    </dd>
+
+                    <!-- Course Description -->
+                    <dt class="col-sm-4 fw-bold text-secondary">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class="col-sm-8 text-dark">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+
+                    <!-- Credits -->
+                    <dt class="col-sm-4 fw-bold text-secondary">
+                        @Html.DisplayNameFor(model => model.Credits)
+                    </dt>
+                    <dd class="col-sm-8 text-dark">
+                        @Html.DisplayFor(model => model.Credits)
+                    </dd>
+                </dl>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="GetAllCourses" class="btn btn-secondary px-4">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    <a asp-action="UpdateCourse" asp-route-id="@Model.Id" class="btn btn-warning px-4">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

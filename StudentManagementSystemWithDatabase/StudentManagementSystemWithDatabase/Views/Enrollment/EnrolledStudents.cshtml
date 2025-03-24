@@ -1,0 +1,51 @@
+﻿@model IEnumerable<StudentManagementSystemWithDatabase.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "Enrolled Students";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="text-center text-primary mb-4">Enrolled Students</h2>
+
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="bg-dark text-white">Student Name</th>
+                            <th class="bg-dark text-white">Course Name</th>
+                            <th class="bg-dark text-white">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var enrollment in Model)
+                        {
+                            <tr>
+                                <td class="fw-bold text-secondary">@enrollment.Student.Name</td>
+                                <td class="text-dark">@enrollment.Course.CourseName</td>
+                                <td>
+                                    <!-- Withdraw Student Form -->
+                                    <form asp-action="WithdrawStudent" method="post" class="d-inline">
+                                        <input type="hidden" name="studentId" value="@enrollment.StudentId" />
+                                        <input type="hidden" name="courseId" value="@enrollment.CourseId" />
+
+                                        <button type="submit" class="btn btn-danger px-3"
+                                                onclick="return confirm('Are you sure you want to withdraw this student?');">
+                                            <i class="fas fa-user-minus"></i> Withdraw
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="text-center text-muted">No students are currently enrolled.</p>
+        }
+    </div>
+</div>

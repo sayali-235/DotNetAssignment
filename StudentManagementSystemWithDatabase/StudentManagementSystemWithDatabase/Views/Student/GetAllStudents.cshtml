@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StudentManagementSystemWithDatabase.Models.Student>
+
+@{
+    ViewData["Title"] = "GetAllStudents";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="text-center text-primary mb-4">Student List</h2>
+
+        <div class="d-flex justify-content-between mb-3">
+            <a asp-controller="Account" asp-action="Register" class="btn btn-success">Add New Student</a>
+            <a asp-controller="Course" asp-action="GetAllCourses" class="btn btn-secondary">Course Details</a>
+            <a asp-controller="Enrollment" asp-action="EnrolledStudents" class="btn btn-success">Enrolled Student</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <!-- Update Button -->
+                                    <a asp-action="UpdateStudent" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Update</a>
+
+                                    <!-- Search Button -->
+                                    <a asp-action="GetStudentById" asp-route-id="@item.Id" class="btn btn-info btn-sm">Search</a>
+
+                                    <!-- Delete Button inside a form (POST request) -->
+                                    <form asp-action="DeleteStudent" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this student?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

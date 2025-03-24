@@ -1,0 +1,57 @@
+﻿@model StudentManagementSystemWithDatabase.Models.Course
+
+@{
+    ViewData["Title"] = "Add Course";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="text-center text-primary mb-4">Add New Course</h2>
+        <hr />
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4 border-info">
+                    <form asp-action="AddCourse">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <!-- Course Name -->
+                        <div class="form-group mb-3">
+                            <label asp-for="CourseName" class="fw-bold text-dark"></label>
+                            <input asp-for="CourseName" class="form-control border-primary" placeholder="Enter Course Name" />
+                            <span asp-validation-for="CourseName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Course Description -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="fw-bold text-dark"></label>
+                            <textarea asp-for="Description" class="form-control border-primary" placeholder="Enter Course Description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <!-- Credits -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Credits" class="fw-bold text-dark"></label>
+                            <input asp-for="Credits" type="number" class="form-control border-primary" placeholder="Enter Course Credits" />
+                            <span asp-validation-for="Credits" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit and Back Buttons -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-plus"></i> Add Course
+                            </button>
+                            <a asp-action="GetAllCourses" class="btn btn-secondary px-4 ms-2">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<StudentManagementSystemWithDatabase.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "Enrollments by Student";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="text-center text-primary mb-4">Student Enrollments</h2>
+        <hr />
+
+        <!-- Create New Enrollment Button -->
+        <div class="text-end mb-3">
+            <a asp-action="EnrollStudent" class="btn btn-success">
+                <i class="fas fa-plus"></i> Add Enrollment
+            </a>
+        </div>
+
+        <!-- Enrollment Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>Student Email</th>
+                        <th>Course Name</th>
+                        <th>Grade</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Student.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Course.CourseName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Grade)</td>
+                            <td>
+                                <form asp-controller="Enrollment" asp-action="WithdrawStudent" method="post" class="d-inline">
+                                    <input type="hidden" name="studentId" value="@item.StudentId" />
+                                    <input type="hidden" name="courseId" value="@item.CourseId" />
+
+                                    <button type="submit" class="btn btn-danger px-3"
+                                            onclick="return confirm('Are you sure you want to withdraw this student?');">
+                                        <i class="fas fa-user-minus"></i> Withdraw
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
