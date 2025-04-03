@@ -1,0 +1,95 @@
+.custom-navbar {
+    background: linear-gradient(45deg, #6a11cb, #2575fc); /* Purple to Blue Gradient */
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar Brand */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-brand:hover {
+    color: #ffdd57 !important;
+}
+
+/* Navbar Links */
+.custom-link {
+    color: #fff !important;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.custom-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Active Link */
+.custom-link.active {
+    background: #ffcc00;
+    color: #333 !important;
+    border-radius: 5px;
+}
+
+/* Toggle Button */
+.custom-toggler {
+    border: 2px solid white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-color: white;
+}
+
+/* Disabled Link */
+.nav-link.disabled {
+    color: rgba(255, 255, 255, 0.5) !important;
+    cursor: not-allowed;
+}
+
+/* Login/Register Buttons */
+.custom-btn {
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-btn {
+    background: #00d4ff; /* Light Blue */
+    color: #fff;
+}
+
+.login-btn:hover {
+    background: #00a1cc;
+    transform: scale(1.05);
+}
+
+.register-btn {
+    background: #ff007f; /* Pink */
+    color: #fff;
+}
+
+.register-btn:hover {
+    background: #cc0066;
+    transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .custom-navbar {
+        background: rgba(0, 0, 0, 0.8);
+    }
+    .d-flex {
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,41 @@
+<div class="register-Layout">
+    <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm)">
+        
+        <div class="mb-3">
+            <label for="firstName" class="form-label">FirstName</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName"/>
+              <div class="error" *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid">First Name required
+                
+              </div>
+          
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">LastName</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName"/>
+              <!-- <span *ngIf="lastName.invalid && lastName.touched"style="color:red">LastName Required
+              </span> -->
+          </div>
+          <div class="mb-3">
+            <label for="phoneNo" class="form-label">PhoneNo</label>
+            <input type="text" class="form-control" id="phoneNo" formControlName="phoneNo"/>
+              <!-- <span *ngIf="lastName.invalid && lastName.touched"style="color:red">LastName Required
+              </span> -->
+          </div>
+        <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="text" class="form-control" id="email"  formControlName="email">
+          <!-- <span *ngIf="email.invalid && email.touched"style="color:red">Email is required</span> -->
+      </div>
+      <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+            <!-- <span *ngIf="password.invalid && password.touched"style="color:red">Password is required</span> -->
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">UserName</label>
+        <input type="password" class="form-control" id="password" formControlName="userName">
+          <!-- <span *ngIf="userName.invalid && userName.touched"style="color:red">User is required</span> -->
+    </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form> 
+  </div>

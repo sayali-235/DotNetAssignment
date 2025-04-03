@@ -1,0 +1,20 @@
+<div class="booking-container">
+  <h2>Book a Ticket</h2>
+  
+  <div class="form-group">
+    <label for="userId">User ID:</label>
+    <input type="number" id="userId" [(ngModel)]="newBooking.userId" required>
+  </div>
+
+  <div class="form-group">
+    <label for="eventId">Event ID:</label>
+    <input type="number" id="eventId" [(ngModel)]="newBooking.eventId" required>
+  </div>
+
+  <div class="form-group">
+    <label for="seatNumbers">Seat Numbers (comma-separated):</label>
+    <input type="text" id="seatNumbers" [(ngModel)]="seatNumberInput" required>
+  </div>
+
+  <button (click)="bookTicket()" class="btn-book">Book Ticket</button>
+</div>

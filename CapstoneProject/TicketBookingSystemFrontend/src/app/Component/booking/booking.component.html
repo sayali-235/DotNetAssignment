@@ -1,0 +1,23 @@
+<div class="booking-container">
+    <h2>Booking List</h2>
+    <div class="booking-cards">
+        <div *ngFor="let booking of bookings" class="booking-card">
+            <h3>Booking Details</h3>
+            <p><strong>User ID:</strong> {{ booking.userId }}</p>
+            <p><strong>Event ID:</strong> {{ booking.eventId }}</p>
+            <p><strong>Seats:</strong> {{ booking.seatNumbers?.join(', ') || 'N/A' }}</p>
+            <p><strong>Date:</strong> {{ booking.bookingDate ? (booking.bookingDate | date:'short') : 'N/A' }}</p>
+            <p><strong>Status:</strong> 
+                <span class="status-label"
+                      [ngClass]="{
+                          'status-pending': booking.bookingStatus === bookingStatusEnum.Pending,
+                          'status-confirmed': booking.bookingStatus === bookingStatusEnum.Confirmed,
+                          'status-cancelled': booking.bookingStatus === bookingStatusEnum.Cancelled
+                      }">
+                      {{ booking.bookingStatus !== undefined ? bookingStatusEnum[booking.bookingStatus] : 'Unknown Status' }}
+
+                </span>
+            </p>
+        </div>
+    </div>
+</div>

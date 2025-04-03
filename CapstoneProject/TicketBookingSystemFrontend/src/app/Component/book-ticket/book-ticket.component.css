@@ -1,0 +1,96 @@
+.booking-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Custom button styling */
+.btn-book {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-book:hover {
+  background: linear-gradient(45deg, #0056b3, #003d82);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-book:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add a slight animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.booking-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
