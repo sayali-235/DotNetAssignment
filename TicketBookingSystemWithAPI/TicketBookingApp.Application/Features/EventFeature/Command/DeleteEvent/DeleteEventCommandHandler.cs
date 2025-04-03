@@ -21,7 +21,7 @@ namespace TicketBookingApp.Application.Features.EventFeature.Command.DeleteEvent
             var eventFindStatus=await _eventRepository.GetEventByIdAsync(request.id);
             if (eventFindStatus is null)
             {
-                throw new NotFoundException($"Book with ID::{request.id} not found");
+                throw new NotFoundException($"Event with ID::{request.id} not found");
             }
             return await _eventRepository.DeleteEventAsync(eventFindStatus.EventId); 
         }

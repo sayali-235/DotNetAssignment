@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using TicketBookingApp.Domain.Constants;
 
 namespace TicketBookingApp.Domain
 {
@@ -21,12 +23,15 @@ namespace TicketBookingApp.Domain
         [Required]
         public DateTime BookingDate { get; set; }
         [Required]
-        public string Status { get; set; } = "Pending"; // Possible values: "Pending", "Confirmed", "Cancelled"
+        public BookingStatus BookingStatus { get; set; }
 
         // Navigation properties
-        public User User { get; set; }
-        public Event Event { get; set; }
-        public Payment Payment { get; set; }
+        [JsonIgnore]
+        public User ?User { get; set; }
+        [JsonIgnore]
+        public Event? Event { get; set; }
+        [JsonIgnore]
+        public Payment? Payment { get; set; }
 
     }
 }

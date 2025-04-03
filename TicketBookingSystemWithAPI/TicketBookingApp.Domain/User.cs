@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace TicketBookingApp.Domain
@@ -19,8 +20,7 @@ namespace TicketBookingApp.Domain
         [Required]
         public string PhoneNumber { get; set; }
         [Required]
-
-
-        public ICollection<Booking> Bookings { get; set; }
+ 
+        public ICollection<Booking> Booking { get; set; }
     }
 }

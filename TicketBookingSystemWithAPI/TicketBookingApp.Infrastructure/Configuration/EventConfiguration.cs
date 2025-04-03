@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicketBookingApp.Domain;
 using TicketBookingApp.Domain.Constants;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TicketBookingApp.Infrastructure.Configuration
 {
-    internal class EventConfiguration : IEntityTypeConfiguration<Event>
+    public class EventConfiguration : IEntityTypeConfiguration<Event>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Event> builder)
+        public void Configure(EntityTypeBuilder<Event> builder)
         {
             builder.HasData(
                 new Event

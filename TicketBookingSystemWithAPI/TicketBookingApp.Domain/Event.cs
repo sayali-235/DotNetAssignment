@@ -28,6 +28,6 @@ namespace TicketBookingApp.Domain
         [Required]
         public EventType EventType {  get; set; }
 
-        public ICollection<Booking>? Bookings { get; set; }
+        public ICollection<Booking>? Booking { get; set; }
     }
 }

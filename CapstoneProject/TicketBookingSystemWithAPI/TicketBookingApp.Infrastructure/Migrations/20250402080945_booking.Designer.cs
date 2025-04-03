@@ -12,8 +12,8 @@ using TicketBookingApp.Infrastructure.Context;
 namespace TicketBookingApp.Infrastructure.Migrations
 {
     [DbContext(typeof(TicketBookingDbContext))]
-    [Migration("20250327124044_initial")]
-    partial class initial
+    [Migration("20250402080945_booking")]
+    partial class booking
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,13 +36,14 @@ namespace TicketBookingApp.Infrastructure.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("BookingStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeatNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
+                    b.Property<string>("SeatNumbers")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -55,7 +56,18 @@ namespace TicketBookingApp.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            BookingId = 1,
+                            BookingDate = new DateTime(2025, 4, 2, 8, 9, 44, 939, DateTimeKind.Utc).AddTicks(8701),
+                            BookingStatus = "Confirmed",
+                            EventId = 1,
+                            SeatNumbers = "10,11,12",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("TicketBookingApp.Domain.Event", b =>
@@ -76,8 +88,9 @@ namespace TicketBookingApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EventType")
-                        .HasColumnType("int");
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -85,6 +98,9 @@ namespace TicketBookingApp.Infrastructure.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TotalSeats")
+                        .HasColumnType("int");
 
                     b.Property<string>("Venue")
                         .IsRequired()
@@ -101,9 +117,10 @@ namespace TicketBookingApp.Infrastructure.Migrations
                             AvailableSeats = 200,
                             Date = new DateTime(2025, 6, 15, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             Description = "A conference on emerging technologies and software development trends.",
-                            EventType = 3,
+                            EventType = "Conference",
                             Name = "Tech Conference 2025",
                             Price = 1499.99m,
+                            TotalSeats = 200,
                             Venue = "Grand Auditorium, Mumbai"
                         });
                 });
@@ -129,7 +146,7 @@ namespace TicketBookingApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("PaymentStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -138,7 +155,18 @@ namespace TicketBookingApp.Infrastructure.Migrations
                     b.HasIndex("BookingId")
                         .IsUnique();
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
+
+                    b.HasData(
+                        new
+                        {
+                            PaymentId = 1,
+                            Amount = 2000.00m,
+                            BookingId = 1,
+                            PaymentDate = new DateTime(2025, 4, 2, 8, 9, 44, 939, DateTimeKind.Utc).AddTicks(9721),
+                            PaymentMethod = "PayPal",
+                            PaymentStatus = "Success"
+                        });
                 });
 
             modelBuilder.Entity("TicketBookingApp.Domain.User", b =>
@@ -163,19 +191,28 @@ namespace TicketBookingApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "sayali@gmail.com",
+                            Name = "Sayali",
+                            PhoneNumber = "1234567890"
+                        });
                 });
 
             modelBuilder.Entity("TicketBookingApp.Domain.Booking", b =>
                 {
                     b.HasOne("TicketBookingApp.Domain.Event", "Event")
-                        .WithMany("Bookings")
+                        .WithMany("Booking")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TicketBookingApp.Domain.User", "User")
-                        .WithMany("Bookings")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -198,18 +235,12 @@ namespace TicketBookingApp.Infrastructure.Migrations
 
             modelBuilder.Entity("TicketBookingApp.Domain.Booking", b =>
                 {
-                    b.Navigation("Payment")
-                        .IsRequired();
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("TicketBookingApp.Domain.Event", b =>
                 {
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("TicketBookingApp.Domain.User", b =>
-                {
-                    b.Navigation("Bookings");
+                    b.Navigation("Booking");
                 });
 #pragma warning restore 612, 618
         }
